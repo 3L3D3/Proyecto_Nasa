@@ -1,4 +1,4 @@
-{% extends 'header.html' %} {% block content %}
+{% extends 'header.html' %} {% load static %} {% block content %}
 <main>
   <h1 class="text-center">Galería de Imágenes de la NASA</h1>
   <div class="d-flex justify-content-center" style="margin-bottom: 1%">
@@ -68,4 +68,95 @@
     {% endfor %}
   </div>
 </main>
-{% endblock %}
+
+<!-- Load spinner -->
+<div id="load_spinner" class="spinner-container">
+  <div class="star"></div>
+</div>
+
+<style>
+  .spinner-container {
+    display: none; /* Inicialmente oculto */
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .star {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(
+      to bottom right,
+      #f1c40f,
+      #f39c12,
+      #e74c3c,
+      #9b59b6,
+      #3498db,
+      #1abc9c,
+      #2ecc71,
+      #27ae60,
+      #16a085
+    );
+    clip-path: polygon(
+      50% 0%,
+      61% 35%,
+      98% 35%,
+      68% 57%,
+      79% 91%,
+      50% 70%,
+      21% 91%,
+      32% 57%,
+      2% 35%,
+      39% 35%
+    );
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    animation: rotateStar 1s infinite linear;
+  }
+
+  @keyframes rotateStar {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+</style>
+
+<script>
+  // Mostrar el spinner al iniciar la carga de la página
+  document.addEventListener("DOMContentLoaded", function () {
+    var spinnerContainer = document.getElementById("load_spinner");
+    spinnerContainer.style.display = "flex"; // Mostrar el spinner
+  });
+
+  // Ocultar el spinner cuando la página haya cargado completamente
+  window.addEventListener("load", function () {
+    var spinnerContainer = document.getElementById("load_spinner");
+    spinnerContainer.style.display = "none";
+  });
+</script>
+
+{% endblock %} /* Estilo para las cartas */ .card { background-color: #fff;
+border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;
+transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+margin-bottom: 30px; } .card:hover { transform: translateY(-5px); box-shadow: 0
+8px 16px rgba(0, 0, 0, 0.2); } .card img { width: 100%; height: 200px; /* Altura
+fija para todas las imágenes */ object-fit: cover; border-top-left-radius: 15px;
+border-top-right-radius: 15px; transition: transform 0.3s ease-in-out; }
+.card:hover img { transform: scale(1.1); } .card .card-body { padding: 20px; }
+.card .card-title { font-size: 1.5rem; font-weight: bold; margin-bottom: 10px;
+color: #333; } .card .card-text { color: #666; line-height: 1.6; margin-bottom:
+20px; } .card .btn { background-color: #03A9F4; color: #fff; border: none;
+border-radius: 5px; padding: 10px 20px; transition: background-color 0.3s; }
+.card .btn:hover { background-color: #0397d6; }
